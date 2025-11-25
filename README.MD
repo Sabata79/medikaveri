@@ -1,6 +1,6 @@
 # Medikaveri – Lääkemuistuttaja (MVP)
 
-![Medikaveri logo](./assets/Medikaveri_logo.webp)
+![Medikaveri logo](./assets/MediKaveri_logo_readme.webp)
 
 _Versio: 0.1.0 (MVP-kehitysvaihe)_
 
