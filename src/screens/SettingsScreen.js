@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     paddingHorizontal: 16,
-    paddingTop: 12,
+    paddingTop: 2, // moved 10px higher
     paddingBottom: 24,
   },
   loadingBox: {
@@ -209,6 +209,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '700',
     marginBottom: 4,
+    marginTop: 5, // moved 5px lower
   },
   sectionDescription: {
     color: '#9ca3af',

@@ -6,6 +6,7 @@
  * @updated 2025-11-25
  */
 import React from 'react';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   View,
   Text,
@@ -26,6 +27,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 
 export default function HomeScreen({ navigation }) {
+  const insets = useSafeAreaInsets();
   const {
     medications,
     isReady,
@@ -312,7 +314,7 @@ export default function HomeScreen({ navigation }) {
 
       {renderContent()}
 
-      <View style={styles.buttonRow}>
+      <View style={[styles.buttonRow, { paddingBottom: insets.bottom + 10 }]}>
         <TouchableOpacity
           style={[
             styles.button,
@@ -356,6 +358,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: '700',
     marginBottom: 4,
+    marginTop: 5, // moved 5px lower
     textAlign: 'center',
   },
   subtitle: {
@@ -495,6 +498,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 12,
     marginTop: 16,
+    marginBottom: 10, // moved 10px higher
   },
   button: {
     flex: 1,

@@ -16,6 +16,7 @@ import {
   Platform,
   ScrollView,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BackHeader from '../components/BackHeader';
 import { useMedications } from '../context/MedicationContext';
 import { useAppTheme } from '../theme/theme';
@@ -30,6 +31,7 @@ import { Ionicons } from '@expo/vector-icons';
 export default function AddMedicationScreen({ navigation }) {
   const { addMedication } = useMedications();
   const { colors } = useAppTheme();
+  const insets = useSafeAreaInsets();
   const [step, setStep] = useState(1);
 
   const [name, setName] = useState('');
@@ -176,23 +178,30 @@ export default function AddMedicationScreen({ navigation }) {
         </Text>
       )}
 
-      <View style={styles.stepButtonsRow}>
+      <View style={[styles.stepButtonsRow, { paddingBottom: insets.bottom || 12 }]}> 
         <TouchableOpacity
-          style={[styles.stepButton, styles.secondaryStepButton]}
+          style={[
+            styles.stepButton,
+            { backgroundColor: colors.cardBorder },
+          ]}
           onPress={goBackStep}
         >
-          <Text style={styles.stepButtonText}>Peruuta</Text>
+          <Text style={[styles.stepButtonText, { color: colors.textPrimary }]}>
+            Peruuta
+          </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={[
             styles.stepButton,
-            styles.primaryStepButton,
+            { backgroundColor: colors.accent },
             !name.trim() && { opacity: 0.6 },
           ]}
           onPress={goNextFromStep1}
         >
-          <Text style={styles.stepButtonText}>Seuraava</Text>
+          <Text style={[styles.stepButtonText, { color: colors.background }]}>
+            Seuraava
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -340,19 +349,29 @@ export default function AddMedicationScreen({ navigation }) {
         </ScrollView>
 
         {/* button row fixed at the bottom */}
-        <View style={styles.stepButtonsRow}>
+        <View style={[styles.stepButtonsRow, { paddingBottom: insets.bottom || 12 }]}> 
           <TouchableOpacity
-            style={[styles.stepButton, styles.secondaryStepButton]}
+            style={[
+              styles.stepButton,
+              { backgroundColor: colors.cardBorder },
+            ]}
             onPress={goBackStep}
           >
-            <Text style={styles.stepButtonText}>Edellinen</Text>
+            <Text style={[styles.stepButtonText, { color: colors.textPrimary }]}>
+              Edellinen
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={[styles.stepButton, styles.primaryStepButton]}
+            style={[
+              styles.stepButton,
+              { backgroundColor: colors.accent },
+            ]}
             onPress={goNextFromStep2}
           >
-            <Text style={styles.stepButtonText}>Seuraava</Text>
+            <Text style={[styles.stepButtonText, { color: colors.background }]}>
+              Seuraava
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -390,7 +409,7 @@ export default function AddMedicationScreen({ navigation }) {
             </TouchableOpacity>
 
             <View style={styles.doseValueBox}>
-              <Text style={styles.doseValue}>{doseAmount}</Text>
+              <Text style={[styles.doseValue, { color: colors.textPrimary }]}>{doseAmount}</Text>
               <Text style={styles.doseUnit}>tabletti(a)</Text>
             </View>
 
@@ -412,19 +431,29 @@ export default function AddMedicationScreen({ navigation }) {
           Yhteensä: {totalPerDay} tablettia päivässä
         </Text>
 
-        <View style={styles.stepButtonsRow}>
+        <View style={[styles.stepButtonsRow, { paddingBottom: insets.bottom || 12 }]}> 
           <TouchableOpacity
-            style={[styles.stepButton, styles.secondaryStepButton]}
+            style={[
+              styles.stepButton,
+              { backgroundColor: colors.cardBorder },
+            ]}
             onPress={goBackStep}
           >
-            <Text style={styles.stepButtonText}>Edellinen</Text>
+            <Text style={[styles.stepButtonText, { color: colors.textPrimary }]}>
+              Edellinen
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={[styles.stepButton, styles.primaryStepButton]}
+            style={[
+              styles.stepButton,
+              { backgroundColor: colors.accent },
+            ]}
             onPress={handleSave}
           >
-            <Text style={styles.stepButtonText}>Tallenna muistutus</Text>
+            <Text style={[styles.stepButtonText, { color: colors.background }]}>
+              Tallenna muistutus
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -463,7 +492,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 16,
     paddingBottom: 24,
-    paddingTop: 12,
+    paddingTop: 2, // moved 10px higher
   },
   stepContainer: {
     flex: 1,
@@ -481,6 +510,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     textAlign: 'center',
     marginBottom: 8,
+    marginTop: 5, // moved 5px lower
   },
   helpText: {
     fontSize: 14,
@@ -511,14 +541,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  primaryStepButton: {
-    backgroundColor: '#10b981',
-  },
-  secondaryStepButton: {
-    backgroundColor: '#374151',
-  },
   stepButtonText: {
-    color: '#f9fafb',
     fontSize: 15,
     fontWeight: '600',
   },
@@ -640,7 +663,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   doseValue: {
-    color: '#f9fafb',
     fontSize: 24,
     fontWeight: '700',
   },
