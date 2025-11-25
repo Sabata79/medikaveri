@@ -1,3 +1,10 @@
+/**
+ * LandingScreen — Simple splash/landing page with logo.
+ * @module src/screens/LandingScreen
+ * @author Sabata79
+ * @since 2025-11-25
+ * @updated 2025-11-25
+ */
 // src/screens/LandingScreen.js
 
 import React, { useEffect, useRef } from 'react';
