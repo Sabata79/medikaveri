@@ -1,11 +1,17 @@
-// src/storage/intakeStorage.js
+/**
+ * intakeStorage — AsyncStorage helpers for medication intake tracking.
+ * @module src/storage/intakeStorage
+ * @author Sabata79
+ * @since 2025-11-25
+ * @updated 2025-11-25
+ */
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getTodayKey } from '../utils/dateUtils';
 
 const INTAKE_KEY = 'MEDICATION_INTAKE_V1';
 
-// Palauttaa { dateKey, intake }
-// intake-muoto: { [medId]: { [time]: true } }
+// Returns { dateKey, intake }
+// intake format: { [medId]: { [time]: true } }
 export async function loadTodayIntake() {
   try {
     const json = await AsyncStorage.getItem(INTAKE_KEY);
@@ -16,7 +22,7 @@ export async function loadTodayIntake() {
     }
 
     const parsed = JSON.parse(json);
-    // Jos talletettu päivä on eri kuin tämä päivä → aloita tyhjällä
+    // If stored date is different from today → start with empty
     if (!parsed.dateKey || parsed.dateKey !== today) {
       return { dateKey: today, intake: {} };
     }

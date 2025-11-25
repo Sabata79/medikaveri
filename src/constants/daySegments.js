@@ -1,6 +1,12 @@
-// src/constants/daySegments.js
+/**
+ * daySegments — Time-of-day segments and helpers for medication scheduling.
+ * @module src/constants/daySegments
+ * @author Sabata79
+ * @since 2025-11-25
+ * @updated 2025-11-25
+ */
 
-// Kaikki jaksot listana
+// All segments as a list
 export const DAY_SEGMENT_LIST = [
   {
     id: 'morning',
@@ -23,8 +29,7 @@ export const DAY_SEGMENT_LIST = [
     window: '00–06',
   },
 ];
-
-// Apusanakirjat: id -> label / aikaikkuna
+// Helper dictionaries: id -> label / time window
 export const DAY_SEGMENT_LABELS = DAY_SEGMENT_LIST.reduce((acc, seg) => {
   acc[seg.id] = seg.label;
   return acc;
@@ -35,7 +40,7 @@ export const DAY_SEGMENT_WINDOWS = DAY_SEGMENT_LIST.reduce((acc, seg) => {
   return acc;
 }, {});
 
-// Järjestys, jota käytetään mm. sorttaukseen
+// Order used e.g. for sorting
 export const DAY_SEGMENT_ORDER = DAY_SEGMENT_LIST.map((seg) => seg.id);
 
 // Ikonit (Ionicons-nimet)

@@ -1,4 +1,11 @@
 // src/constants/CompleteTexts.js
+/**
+ * CompleteTexts — Motivational texts shown after medication intake.
+ * @module src/constants/CompleteTexts
+ * @author Sabata79
+ * @since 2025-11-25
+ * @updated 2025-11-25
+ */
 
 export const COMPLETE_TEXT = [
   "Mahtavaa, otit lääkkeesi ajallaan, hyvin tehty! ✅",

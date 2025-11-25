@@ -1,4 +1,10 @@
-// src/screens/SettingsScreen.js
+/**
+ * SettingsScreen — Screen for managing app settings and preferences.
+ * @module src/screens/SettingsScreen
+ * @author Sabata79
+ * @since 2025-11-25
+ * @updated 2025-11-25
+ */
 import React from 'react';
 import {
   View,
@@ -23,12 +29,12 @@ export default function SettingsScreen({ navigation }) {
 
   const handleToggleNotifications = (value) => {
     setNotificationsEnabled(value);
-    // myöhemmin kytketään tähän oikeat ilmoitusluvat / peruutukset
+    // later: connect to real notification permissions/cancellations
   };
 
   const handleSelectTheme = (mode) => {
     setThemeMode(mode);
-    // myöhemmin: kytketään oikeaan teemapalettiin
+    // later: connect to real theme palette
   };
 
   if (!isReady) {
@@ -37,7 +43,7 @@ export default function SettingsScreen({ navigation }) {
         <BackHeader title="Asetukset" onBack={() => navigation.goBack()} />
         <View style={styles.loadingBox}>
           <Text style={[styles.loadingText, { color: colors.textPrimary }]}>
-            Ladataan asetuksia...
+            Loading settings...
           </Text>
         </View>
       </View>

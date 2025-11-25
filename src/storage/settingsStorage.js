@@ -1,4 +1,10 @@
-// src/storage/settingsStorage.js
+/**
+ * settingsStorage — AsyncStorage helpers for app settings persistence.
+ * @module src/storage/settingsStorage
+ * @author Sabata79
+ * @since 2025-11-25
+ * @updated 2025-11-25
+ */
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SETTINGS_KEY = 'SETTINGS_V1';
@@ -17,7 +23,7 @@ export async function loadSettings() {
     const parsed = JSON.parse(json);
     return {
       ...defaultSettings,
-      ...parsed, // jos joskus lisätään uusia kenttiä
+      ...parsed, // if new fields are added in the future
     };
   } catch (e) {
     console.warn('Error loading settings', e);

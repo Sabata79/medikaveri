@@ -1,4 +1,10 @@
-// src/context/SettingsContext.js
+/**
+ * SettingsContext — Context provider for app settings and preferences.
+ * @module src/context/SettingsContext
+ * @author Sabata79
+ * @since 2025-11-25
+ * @updated 2025-11-25
+ */
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { loadSettings, saveSettings } from '../storage/settingsStorage';
 
@@ -11,7 +17,7 @@ export function SettingsProvider({ children }) {
   });
   const [isReady, setIsReady] = useState(false);
 
-  // Lataa asetukset alussa
+  // Load settings on mount
   useEffect(() => {
     (async () => {
       const loaded = await loadSettings();
@@ -20,7 +26,7 @@ export function SettingsProvider({ children }) {
     })();
   }, []);
 
-  // Tallenna asetukset aina kun muuttuu
+  // Save settings whenever they change
   useEffect(() => {
     if (!isReady) return;
     saveSettings(settings);

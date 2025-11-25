@@ -1,4 +1,3 @@
-// src/components/BackHeader.js
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -36,7 +35,7 @@ export default function BackHeader({ title, onBack }) {
         {title}
       </Text>
 
-      {/* oikealle tyhjä tila, jotta title pysyy keskellä */}
+      {/* empty space on the right to keep the title centered */}
       <View style={{ width: 40 }} />
     </View>
   );

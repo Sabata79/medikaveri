@@ -1,4 +1,10 @@
-// src/theme/theme.js
+/**
+ * theme — Theme palette and hook for app theming.
+ * @module src/theme/theme
+ * @author Sabata79
+ * @since 2025-11-25
+ * @updated 2025-11-25
+ */
 import { useColorScheme } from 'react-native';
 import { useSettings } from '../context/SettingsContext';
 
@@ -29,7 +35,7 @@ export function useAppTheme() {
   const systemScheme = useColorScheme(); // 'light' | 'dark' | null
   const { themeMode } = useSettings();
 
-  // päättele käytettävä teema
+  // decide which theme to use
   let scheme = themeMode;
   if (themeMode === 'system') {
     scheme = systemScheme || 'light';

@@ -1,7 +1,13 @@
-// src/storage/medicationStorage.js
+/**
+ * medicationStorage — AsyncStorage helpers for medication list persistence.
+ * @module src/storage/medicationStorage
+ * @author Sabata79
+ * @since 2025-11-25
+ * @updated 2025-11-25
+ */
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const MEDICATIONS_KEY = 'MEDICATIONS_V1'; // versio tagiin, jos malli muuttuu tulevaisuudessa
+const MEDICATIONS_KEY = 'MEDICATIONS_V1'; // version tag for future model changes
 
 export async function loadMedications() {
   try {

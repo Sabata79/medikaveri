@@ -1,4 +1,10 @@
-// src/screens/AddMedicationScreen.js
+/**
+ * AddMedicationScreen — Screen for adding a new medication.
+ * @module src/screens/AddMedicationScreen
+ * @author Sabata79
+ * @since 2025-11-25
+ * @updated 2025-11-25
+ */
 import React, { useState } from 'react';
 import {
   View,
@@ -29,10 +35,10 @@ export default function AddMedicationScreen({ navigation }) {
   const [name, setName] = useState('');
   const [doseAmount, setDoseAmount] = useState(1);
 
-  // Montako kertaa vuorokaudessa (1–4)
+  // How many times per day (1–4)
   const [timesPerDay, setTimesPerDay] = useState(1);
 
-  // Valitut vuorokauden jaksot – käyttäjä valitsee itse
+  // Selected day segments – user chooses manually
   const [segments, setSegments] = useState([]);
 
   const [errors, setErrors] = useState({});
@@ -57,11 +63,11 @@ export default function AddMedicationScreen({ navigation }) {
   const handleSelectTimesPerDay = (value) => {
     setTimesPerDay(value);
     setSegments((prev) => {
-      // jos nykyiset valinnat sopivat uuden määrän sisään, pidetään ne
+      // if current selections fit within the new amount, keep them
       if (prev.length > 0 && prev.length <= value) {
         return prev;
       }
-      // muuten tyhjennetään, käyttäjä valitsee jaksot itse
+      // otherwise clear, user selects segments manually
       return [];
     });
   };
@@ -71,7 +77,7 @@ export default function AddMedicationScreen({ navigation }) {
       const exists = prev.includes(id);
 
       if (exists) {
-        // sallitaan pois päältä klikkaus
+        // allow turning off by click
         return prev.filter((s) => s !== id);
       }
 
@@ -126,7 +132,7 @@ export default function AddMedicationScreen({ navigation }) {
     addMedication({
       name: name.trim(),
       doseAmount,
-      segments, // esim. ['morning', 'evening'] – kellonajat lasketaan sisäisesti
+      segments, // e.g. ['morning', 'evening'] – times are calculated internally
     });
 
     navigation.goBack();
@@ -138,7 +144,7 @@ export default function AddMedicationScreen({ navigation }) {
     </Text>
   );
 
-  // --- STEP 1: nimi ---
+  // --- STEP 1: name ---
   const renderStep1 = () => (
     <View style={styles.stepContainer}>
       {renderStepIndicator()}
@@ -192,7 +198,7 @@ export default function AddMedicationScreen({ navigation }) {
     </View>
   );
 
-  // --- STEP 2: kerrat / vrk + jaksot (ilman kellonaikoja) ---
+  // --- STEP 2: times/day + segments (without times) ---
   const renderStep2 = () => {
     const selectedText = formatSegmentsToLabel(segments);
     const selectedCount = segments.length;
@@ -213,7 +219,7 @@ export default function AddMedicationScreen({ navigation }) {
             valitset, mihin vuorokauden jaksoihin annokset sijoittuvat.
           </Text>
 
-          {/* 1x–4x valinta */}
+          {/* 1x–4x selection */}
           <View style={styles.timesRow}>
             {[1, 2, 3, 4].map((val) => {
               const selected = val === timesPerDay;
@@ -240,7 +246,7 @@ export default function AddMedicationScreen({ navigation }) {
             })}
           </View>
 
-          {/* Vuorokauden jaksot */}
+          {/* Day segments */}
           <Text
             style={[
               styles.segmentIntro,
@@ -333,7 +339,7 @@ export default function AddMedicationScreen({ navigation }) {
           )}
         </ScrollView>
 
-        {/* nappirivi kiinteästi alhaalla */}
+        {/* button row fixed at the bottom */}
         <View style={styles.stepButtonsRow}>
           <TouchableOpacity
             style={[styles.stepButton, styles.secondaryStepButton]}
@@ -353,7 +359,7 @@ export default function AddMedicationScreen({ navigation }) {
     );
   };
 
-  // --- STEP 3: annosmäärä + yhteenveto (ilman kellonaikoja) ---
+  // --- STEP 3: dose amount + summary (without times) ---
   const renderStep3 = () => {
     const selectedText = formatSegmentsToLabel(segments);
     const selectedCount = segments.length;

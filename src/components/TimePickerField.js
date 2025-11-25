@@ -1,3 +1,10 @@
+/**
+ * TimePickerField — Time selection field component for medication reminders.
+ * @module src/components/TimePickerField
+ * @author Sabata79
+ * @since 2025-11-25
+ * @updated 2025-11-25
+ */
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Platform } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -5,8 +12,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { useAppTheme } from '../theme/theme';
 
 export default function TimePickerField({
-  label = 'Kellonaika',
-  helpText = 'Valitse kellonaika painamalla nappia.',
+  label = 'Kellonaika', // Time
+  helpText = 'Valitse kellonaika painamalla nappia.', // Select time by pressing the button.
   value,            // "HH:MM"
   onChange,         // (newTimeString) => void
 }) {

@@ -1,3 +1,10 @@
+/**
+ * RootNavigator — Main navigation container for the app.
+ * @module src/navigation/RootNavigator
+ * @author Sabata79
+ * @since 2025-11-25
+ * @updated 2025-11-25
+ */
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';

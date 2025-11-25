@@ -1,4 +1,10 @@
-// src/context/MedicationContext.js
+/**
+ * MedicationContext — Context provider for medication state and logic.
+ * @module src/context/MedicationContext
+ * @author Sabata79
+ * @since 2025-11-25
+ * @updated 2025-11-25
+ */
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { loadMedications, saveMedications } from '../storage/medicationStorage';
 import { calculateDoseTimes } from '../utils/calculateDoseTimes';
@@ -12,11 +18,11 @@ export function MedicationProvider({ children }) {
   const [medications, setMedications] = useState([]);
   const [isReady, setIsReady] = useState(false);
 
-  // Päivän otot: { [medId]: { [time]: true } }
+  // Today's intakes: { [medId]: { [time]: true } }
   const [todayKey, setTodayKey] = useState(getTodayKey());
   const [todayIntake, setTodayIntake] = useState({});
 
-  // Lataa alussa lääkkeet + päivän otot
+  // Load medications and today's intakes on mount
   useEffect(() => {
     (async () => {
       const stored = await loadMedications();
@@ -30,7 +36,7 @@ export function MedicationProvider({ children }) {
     })();
   }, []);
 
-  // Tallenna lääkkeet aina kun muuttuu
+  // Save medications whenever they change
   useEffect(() => {
     if (!isReady) return;
     saveMedications(medications);
@@ -41,18 +47,18 @@ export function MedicationProvider({ children }) {
   };
 
   const addMedication = ({ name, doseAmount, segments }) => {
-    // segments: esim. ['morning', 'evening']
+    // segments: e.g. ['morning', 'evening']
     const doseTimes = calculateDoseTimes(segments);
     const timesPerDay = segments?.length ?? 0;
 
     const newMed = {
-      id: createLocalId(),      // käytä samaa ID-funktiota kuin aiemmin
+      id: createLocalId(),      // use the same ID function as before
       name,
       doseAmount,
-      segments,                 // talletetaan myös segmentit
-      timesPerDay,              // esim. 2x päivässä
-      doseTimes,                // esim. ['08:00', '20:00']
-      // myöhemmin tänne voidaan lisätä esim. kuurin kesto, lastTaken jne.
+      segments,                 // also store segments
+      timesPerDay,              // e.g. 2x per day
+      doseTimes,                // e.g. ['08:00', '20:00']
+      // later: can add e.g. course duration, lastTaken, etc.
     };
 
     setMedications((prev) => [...prev, newMed]);
@@ -60,7 +66,7 @@ export function MedicationProvider({ children }) {
 
   const removeMedication = (id) => {
     setMedications((prev) => prev.filter((med) => med.id !== id));
-    // Samalla poistetaan myös päivän otto-tiedot tälle lääkkeelle
+    // Also remove today's intake data for this medication
     setTodayIntake((prev) => {
       if (!prev[id]) return prev;
       const updated = { ...prev };
@@ -70,12 +76,12 @@ export function MedicationProvider({ children }) {
     });
   };
 
-  // Merkitse yksittäinen kellonaika otetuksi tälle päivälle
+  // Mark a single dose time as taken for today
   const markDoseTaken = (medId, doseTime) => {
     setTodayIntake((prev) => {
       const medIntake = prev[medId] || {};
       if (medIntake[doseTime]) {
-        return prev; // jo otettu
+        return prev; // already taken
       }
       const updatedMed = { ...medIntake, [doseTime]: true };
       const updated = { ...prev, [medId]: updatedMed };

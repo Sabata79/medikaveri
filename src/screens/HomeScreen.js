@@ -1,4 +1,10 @@
-// src/screens/HomeScreen.js
+/**
+ * HomeScreen — Main screen showing today's medications and actions.
+ * @module src/screens/HomeScreen
+ * @author Sabata79
+ * @since 2025-11-25
+ * @updated 2025-11-25
+ */
 import React from 'react';
 import {
   View,
